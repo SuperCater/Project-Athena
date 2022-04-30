@@ -12,7 +12,7 @@ module.exports = (bot, reload) => {
 
     events.forEach((f, i) => {
         if (reload)
-            delete require.cache[require.resolve(`../event/${f}`)]
+            delete require.cache[require.resolve(`../events/${f}`)]
         const event = require(`../events/${f}`)
         client.events.set(event.name, event)
 
@@ -28,8 +28,8 @@ function triggerEventHandler(bot, event, ...args){
     const {client} = bot
 
     try {
-        if (client,events.has(event))
-            client.event.get(event).run(bot, ...args)
+        if (client.events.has(event))
+            client.events.get(event).run(bot, ...args)
         else
             throw new Error(`Event ${event} does not exist`)
     }
@@ -45,7 +45,7 @@ function initEvents(bot) {
         triggerEventHandler(bot, "ready")
     })
 
-    client.on("messageCreate", () => {
-        triggerEventHandler(bot, "messageCreate")
+    client.on("messageCreate", (message) => {
+        triggerEventHandler(bot, "messageCreate", message)
     })
 }

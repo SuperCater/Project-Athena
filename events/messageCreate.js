@@ -7,9 +7,9 @@ module.exports = {
 
         if (!message.guild) return
 
-        if (!message.author.bot) return
+        if (message.author.bot) return
 
-        if (!message.content.startWith(prefix))
+        if (!message.content.startsWith(prefix))
             return
 
         const args = message.content.slice(prefix.length).trim().split(/ +/g)
@@ -24,7 +24,7 @@ module.exports = {
             return message.reply("This command is only available to the bot owners!")
         }
 
-        if (command.permission && member.permission.missing(command.permission).length !== 0){
+        if (command.permissions && member.permissions.missing(command.permissions).length !== 0){
             return message.reply("You do not have permission to use this command!")
         }
         
