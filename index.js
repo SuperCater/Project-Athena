@@ -11,6 +11,22 @@ const client = new Discord.Client({
     ]
 })
 
+let bot = {
+    client,
+    prefix: "c.",
+    owners: ["439514395534688257"]
+}
+
+client.commands = new Discord.Collection()
+client.events = new Discord.Collection()
+
+client.loadEvents = (bot, reload) => require("./handlers/events")(bot, reload)
+client.loadCommands = (bot, reload) => require("./handlers/commands")(bot, reload)
+
+client.loadEvents(bot, false)
+client.loadCommands(bot, false)
+module.exports = bot
+
 client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}`)
 })
@@ -28,14 +44,14 @@ client.on("messageCreate", (message) => {
 })
 
 client.on("messageCreate", (message) => {
-    if (message.content == ">points"){
-        message.reply(`You have ${points} points`)
+    if (message.content == "points"){
+        message.reply(`You have ${points} points!`)
     }
 })
 
 client.on("messageCreate", (message) => {
     if (message.content == "test"){
-        message.reply("The bot is running")
+        message.reply("The bot is running!")
     }
 })
 
