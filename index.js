@@ -1,10 +1,13 @@
 const Discord = require('discord.js')
 require("dotenv").config()
 
+let points = 1
+
 const client = new Discord.Client({
     intents: [
         "GUILDS",
-        "GUILD_MESSAGES"
+        "GUILD_MESSAGES",
+        "GUILD_MEMBERS"
     ]
 })
 
@@ -15,6 +18,24 @@ client.on("ready", () => {
 client.on("messageCreate", (message) => {
     if (message.content == "hi"){
         message.reply("Hello World!")
+    }
+})
+
+client.on("messageCreate", (message) => {
+    if (message.content == "help"){
+        message.reply("If you need help just ping a moderator and they will assist you!")
+    }
+})
+
+client.on("messageCreate", (message) => {
+    if (message.content == ">points"){
+        message.reply(`You have ${points} points`)
+    }
+})
+
+client.on("messageCreate", (message) => {
+    if (message.content == "test"){
+        message.reply("The bot is running")
     }
 })
 
