@@ -25,26 +25,22 @@ client.loadEvents(bot, false)
 client.loadCommands(bot, false)
 module.exports = bot
 
-client.on("ready", () => {
-    console.log(`Logged in as ${client.user.tag}`)
-})
+
+const guildId = "851241760462340176"
 
 client.slashcommands = new Discord.Collection()
 
 client.loadSlashCommands = (bot, reload) => require("./handlers/slashcommands")(bot, reload)
 client.loadSlashCommands(bot, false)
 
-client.on("interactionCreate", (interaction) => {
-    if (!interaction.isCommand()) return
-    if (!interaction.inGuild()) return interaction.reply("This command can only be used in a server!")
+client.on("ready", async () => {
+    const guild = client.guilds.cache.get(guildId)
+    if (!guild)
+       return console.error("Target guild not found")
 
-    const slashcmd = client.slashcommands.get(interaction.commandName)
-
-    if (!slashcmd) return interaction.reply("Invalid slash command")
-
-    if (slashcmd.perms && !interaction.mamber.permissions.has(slashcmd.perm))
-    return interaction.reply("You do not have permission for this command!")
-    slashcmd.run(client, interaction)
+    await guild.commands.set([...client.slashcommands.values()])
+    console.log(`Succesfully loaded in ${client.slashcommands.size}`)
+    process.exit(0)
 })
 
 client.login(process.env.TOKEN)
