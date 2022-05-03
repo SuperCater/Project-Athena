@@ -24,7 +24,7 @@ module.exports = {
     perm: "BAN_MEMBERS",
     options: [
         {
-            name: "user", description: "The user to timeout",
+            name: "user", description: "The user to ban",
             type: "USER", required: true
         },
         {
