@@ -34,8 +34,4 @@ client.loadButtons(bot, false)
 
 module.exports = bot
 
-client.on("ready", () => {
-    console.log(`Logged in as ${client.user.tag}`)
-})
-
 client.login(process.env.TOKEN)

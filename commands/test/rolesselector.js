@@ -6,14 +6,14 @@ module.exports = {
     devOnly: true,
     run: async ({client, message, args}) => {
         message.channel.send({
-        embeds: [
-            new MessageEmbed().setTitle("Select Role").setDescription("Select roles from the buttons below").setColor("BLUE")
-        ],
-            componets: [
+            embeds: [
+                new MessageEmbed().setTitle("Select Role").setDescription("Select roles from the buttons below").setColor("BLUE")
+            ],
+            components: [
                 new MessageActionRow().addComponents([
-                    new MessageButton().setCustomId("role-971608767936487455").setStyle("PRIMARY").setLabel("Test")
+                    new MessageButton().setCustomId("role-971608767936487455").setStyle("PRIMARY").setLabel("test")
                 ])
-             ]
+            ]
         })
     }
 }
