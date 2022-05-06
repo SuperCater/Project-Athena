@@ -1,7 +1,7 @@
 const Discord = require("discord.js")
 require("dotenv").config()
 
-
+const mongoose = require("mongoose")
 
 const client = new Discord.Client({
     intents: [
@@ -33,5 +33,14 @@ client.loadSlashCommands(bot, false)
 client.loadButtons(bot, false)
 
 module.exports = bot
+
+mongoose.connect(process.env.MONGODB_SRV, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(()=>{
+    console.log("Connected to the Athena database")
+}).catch((err) =>{
+    console.log(err)
+})
 
 client.login(process.env.TOKEN)
