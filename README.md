@@ -24,3 +24,6 @@ The main branch is used for comitts that are finalized with no major bugs (hopef
 
 ### Development
 The development branch is used for incomplete features or features with major bugs and issues. Only use this if you want to try and fix my messy and broken code.
+
+### Rewrite
+The rewrite branch is a temporary main branch used while I completley rewrite the bot, DO NOT USE THIS BRANCH!!! This branch will have non-functional componets and will not have any of the completed features that the main branch has till it is completed.
