@@ -1,0 +1,29 @@
+{
+  "name": "athena",
+  "version": "4.0.0-pre",
+  "description": "Athena a discord bot",
+  "main": "src/bot.js",
+  "scripts": {
+    "test": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SuperCater/Project-Athena.git#V4"
+  },
+  "keywords": [
+    "discord"
+  ],
+  "author": "Cater#8008",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SuperCater/Project-Athena/issues"
+  },
+  "homepage": "https://github.com/SuperCater/Project-Athena/tree/V4#readme",
+  "dependencies": {
+    "@discordjs/rest": "^1.3.0",
+    "chalk": "^4.1.2",
+    "discord-api-types": "^0.37.18",
+    "discord.js": "^14.6.0",
+    "dotenv": "^16.0.3"
+  }
+}
