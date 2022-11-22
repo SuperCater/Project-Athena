@@ -12,6 +12,7 @@ const client = new Client({ intents: [
 client.commands = new Collection();
 client.commandArray = [];
 client.cddCommandArray = [];
+client.gslCommandArray = [];
 
 const functionFolders = fs.readdirSync('./src/functions');
 for (const folder of functionFolders) {

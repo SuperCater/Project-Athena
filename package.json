@@ -4,7 +4,8 @@
   "description": "Athena a discord bot",
   "main": "src/bot.js",
   "scripts": {
-    "test": "node ."
+    "test": "node .",
+    "start": "node ."
   },
   "repository": {
     "type": "git",
