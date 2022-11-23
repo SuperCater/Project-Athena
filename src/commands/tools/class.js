@@ -18,20 +18,14 @@ module.exports = {
         const paid = interaction.guild.roles.cache.find(role => role.name === "Paid Developer");
         const unpaid = interaction.guild.roles.cache.find(role => role.name === "Volunteer Developer");
 
-        if (c === "Paid" && !member.roles.cache.has(paid.id)) {
+        if (c === "Paid") {
             member.roles.remove(unpaid);
             member.roles.add(paid);
             await interaction.reply(`Changed ${user.username}'s class to Paid.`);
-        } else {
-            await interaction.reply("The user is already in that class.");
-        }
-
-        if (c === "Volunteer" && !member.roles.cache.has(unpaid.id)) {
+        } else if (c === "Volunteer") {
             member.roles.remove(paid);
             member.roles.add(unpaid);
             await interaction.reply(`Changed ${user.username}'s class to Volunteer.`);
-        } else {
-            await interaction.reply("The user is already in that class.");
         }
     },
     type: "GSL",

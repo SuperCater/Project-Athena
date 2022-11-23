@@ -29,6 +29,19 @@ module.exports = {
                 console.error(error);
                 await interaction.reply({ content: 'There was an error while executing this button!', ephemeral: true });
             }
+        } else if (interaction.isSelectMenu()) {
+            const { selectMenus } = client
+            const { customId } = interaction
+            const menu = selectMenus.get(customId)
+            if (!menu) return new Error("Nenu failed to execute.");
+
+            try {
+                await menu.execute(interaction, client);
+            }
+            catch (error) {
+                console.error(error);
+                await interaction.reply({ content: 'There was an error while executing this menu!', ephemeral: true });
+            }
         }
     }
 }
