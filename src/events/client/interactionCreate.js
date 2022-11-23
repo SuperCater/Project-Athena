@@ -5,7 +5,7 @@ module.exports = {
     async execute(interaction, client) {
         if (interaction.isChatInputCommand()) {
             if (interaction.guild.name !== null) {
-                console.log(info(`Command: ${interaction.commandName} has been executed by ${interaction.user.tag} in ${interaction.guild.name} ID: (${interaction.guild.id}`));
+                console.log(info(`Command: ${interaction.commandName} has been executed by ${interaction.user.tag} in ${interaction.guild.name} ID: ${interaction.guild.id}`));
             } else {
                 console.log(info(`Command: ${interaction.commandName} has been executed by ${interaction.user.tag} in DMs.`))
             }
