@@ -22,6 +22,7 @@ for (const folder of functionFolders) {
     for (const file of functionFiles) require(`./functions/${folder}/${file}`)(client);
 }
 
+
+client.login(testToken);
 client.handleEvents();
 client.handleCommands();
-client.login(testToken);
