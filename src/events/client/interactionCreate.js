@@ -55,6 +55,18 @@ module.exports = {
                 console.error(error);
                 await interaction.reply({ content: 'There was an error while executing this modal!', ephemeral: true });
             }
+        } else if (interaction.isContextMenuCommand()) {
+            const { commands } = client
+            const { commandName } = interaction
+            const contextCommand = commands.get(commandName)
+
+            if (!contextCommand) return;
+            try {
+                await contextCommand.execute(interaction, client);
+            } catch (error) {
+                console.error(error);
+                await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+            }
         }
     }
 }
