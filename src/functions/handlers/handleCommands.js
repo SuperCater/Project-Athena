@@ -1,7 +1,7 @@
 const fs = require("fs");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v10");
-const { testClient, testToken } = require("../../../config.json");
+const { clientId, token } = require("../../../config.json");
 const chalk = require("chalk");
 
 const cError = chalk.bold.red;
@@ -11,14 +11,14 @@ const success = chalk.bold.green;
 const fullSuccess = chalk.white.bgGreen.bold;
 const info = chalk.bold.blue;
 
-const rest = new REST({ version: "10" }).setToken(testToken);
+const rest = new REST({ version: "10" }).setToken(token);
 
 const deployToGuild = async (guildId, commandData, client) => {
   try {
     const guild = await client.guilds.fetch(guildId)
     console.log(info(`Started refreshing application (/) commands for ${guild.name}. ID: ${guild.id}`));
     await rest.put(
-      Routes.applicationGuildCommands(testClient, guildId),
+      Routes.applicationGuildCommands(clientId, guildId),
       { body: commandData },
     );
     console.log(success(`Successfully reloaded ${commandData.length} application (/) commands for guild ${guild.name}. ID: ${guild.id}`));
@@ -31,7 +31,7 @@ const deployToGlobal = async (commandData) => {
   try {
     console.log(info("Started refreshing application (/) commands for global."));
     await rest.put(
-      Routes.applicationCommands(testClient),
+      Routes.applicationCommands(clientId),
       { body: commandData },
     );
     console.log(success(`Successfully reloaded ${commandData.length} application (/) commands for global.`));
@@ -99,7 +99,7 @@ module.exports = async (client) => {
     if (process.argv[2] === "deploy" || process.argv[2] === "delete" || process.argv[2] === "full") {
       await deployToGuild("851241760462340176", client.cddCommandArray, client); // CDD
       await deployToGuild("1017818009475239946", client.gslCommandArray, client) // GSL
-      // deployToGuild("831089104154394634", client.gssCommandArray, client) // ! GSS, disabled during testing.
+      deployToGuild("831089104154394634", client.gssCommandArray, client) // ! GSS, disabled during testing.
       await deployToGlobal(client.commandArray) // GLOBAL
       console.log(fullSuccess("All commands have been deployed."))
 

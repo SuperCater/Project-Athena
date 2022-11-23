@@ -6,9 +6,9 @@ module.exports = {
     name: 'ready',
     once: true,
     async execute(client) {
-        const status = "The Cooler Athena"
-        // const response = responses[Math.floor(Math.random() * responses.length)];
-        console.log(fullSuccess(`Logged in as ${client.user.tag} with status of `));
+        let status = "The Cooler Athena"
+        // response = responses[Math.floor(Math.random() * responses.length)];
+        console.log(fullSuccess(`Logged in as ${client.user.tag} with status of ${status}`));
         client.user.setActivity(status);
     }
 }

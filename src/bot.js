@@ -1,4 +1,4 @@
-const { testToken } = require('../config.json');
+const { token } = require('../config.json');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const fs = require('fs');
 
@@ -25,7 +25,7 @@ for (const folder of functionFolders) {
 }
 
 
-client.login(testToken);
+client.login(token);
 client.handleEvents();
 client.handleComponents();
 client.handleCommands();

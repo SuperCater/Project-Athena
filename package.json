@@ -1,6 +1,6 @@
 {
   "name": "athena",
-  "version": "4.0.4-pre",
+  "version": "4.0.1",
   "description": "Athena a discord bot",
   "main": "src/bot.js",
   "scripts": {
