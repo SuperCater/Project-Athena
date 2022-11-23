@@ -1,11 +1,12 @@
 {
   "name": "athena",
-  "version": "4.0.0-pre",
+  "version": "4.0.4-pre",
   "description": "Athena a discord bot",
   "main": "src/bot.js",
   "scripts": {
     "test": "node .",
-    "start": "node ."
+    "start": "node .",
+    "build": "docker build -t athena ."
   },
   "repository": {
     "type": "git",

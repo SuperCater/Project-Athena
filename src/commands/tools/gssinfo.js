@@ -1,19 +1,19 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, UserFlagsBitField, UserManager } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('info')
-        .setDescription('Get info about the bot.'),
+        .setName('gssinfo')
+        .setDescription('Get info about the Green Sky Studios version of the bot'),
     async execute(interaction, client) {
         const embed = new EmbedBuilder()
-        .setTitle("Project Athena Information")
+        .setTitle("Project Athena GSS Edition Information")
         .setDescription("Information about Project Athena.")
-        .setColor(0xdc9c0d)
-        .setThumbnail("https://images-ext-2.discordapp.net/external/ejXeA4CsPq8hvtUgIERDUWrfTJgIq9rsCgNuFzgozY4/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/965076506005082153/8c3cfe99872b8f7e2b0665b4881e6d4a.png?width=676&height=676")
+        .setColor(0x2dc617)
+        .setThumbnail("https://cdn.discordapp.com/icons/831089104154394634/a_eb9d3634d2e041962f2576146099d4f9.gif?size=100")
         .setTimestamp(Date.now())
         .setFooter({
             text: `Project Athena`,
-            iconURL: "https://images-ext-2.discordapp.net/external/ejXeA4CsPq8hvtUgIERDUWrfTJgIq9rsCgNuFzgozY4/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/965076506005082153/8c3cfe99872b8f7e2b0665b4881e6d4a.png?width=676&height=676"
+            iconURL: "https://images-ext-2.discordapp.net/external/ejXeA4CsPq8hvtUgIERDUWrfTJgIq9rsCgNuFzgozY4/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/965076506005082153/8c3cfe99872b8f7e2b0665b4881e6d4a.png?width=676&height=676",
         })
         .addFields([
             {
@@ -32,5 +32,5 @@ module.exports = {
 
         await interaction.reply({ embeds: [embed] });
     },
-    type: "GLOBAL"
+    type: "GSS"
 }

@@ -11,6 +11,8 @@ const client = new Client({ intents: [
 ]});
 client.commands = new Collection();
 client.commandArray = [];
+
+client.gssCommandArray = [];
 client.cddCommandArray = [];
 client.gslCommandArray = [];
 
