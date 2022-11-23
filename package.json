@@ -5,7 +5,8 @@
   "main": "src/bot.js",
   "scripts": {
     "test": "node .",
-    "start": "node ."
+    "start": "node .",
+    "build": "docker build -t athena ."
   },
   "repository": {
     "type": "git",

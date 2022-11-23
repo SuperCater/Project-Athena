@@ -2,7 +2,6 @@ const fs = require("fs");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v10");
 const { testClient, testToken } = require("../../../config.json");
-const delay = require("delay");
 
 const rest = new REST({ version: "10" }).setToken(testToken);
 
@@ -40,12 +39,11 @@ module.exports = async (client) => {
       const commandFiles = fs
         .readdirSync(`./src/commands/${folder}`)
         .filter((file) => file.endsWith(".js"));
-      const { commands, commandArray, cddCommandArray, gslCommandArray } =
+      const { commands, commandArray, cddCommandArray, gslCommandArray, gssCommandArray } =
         client;
       for (const file of commandFiles) {
         const command = require(`../../commands/${folder}/${file}`);
         commands.set(command.data.name, command);
-
         switch (command.type) {
           case "GLOBAL":
             commandArray.push(command.data.toJSON());
@@ -57,8 +55,17 @@ module.exports = async (client) => {
             gslCommandArray.push(command.data.toJSON());
             cddCommandArray.push(command.data.toJSON());
             break;
+          case "GSS":
+            gslCommandArray.push(command.data.toJSON());
+            cddCommandArray.push(command.data.toJSON());
+            gssCommandArray.push(command.data.toJSON());
         }
+        if (command.type === undefined) {
+          console.log(`Command ${command.data.name} failed to include a type, defaulting to GLOBAL.`);
+          commandArray.push(command.data.toJSON());
+        } else {
         console.log(`Command: ${command.data.name} has been handled as a ${command.type} command.`);
+        }
       }
     }
 
