@@ -10,8 +10,10 @@ const client = new Client({ intents: [
     GatewayIntentBits.MessageContent,
 ]});
 client.commands = new Collection();
-client.commandArray = [];
+client.buttons = new Collection();
 
+
+client.commandArray = [];
 client.gssCommandArray = [];
 client.cddCommandArray = [];
 client.gslCommandArray = [];
@@ -25,4 +27,5 @@ for (const folder of functionFolders) {
 
 client.login(testToken);
 client.handleEvents();
+client.handleComponents();
 client.handleCommands();

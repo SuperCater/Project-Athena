@@ -87,5 +87,5 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 /config.json
-/src/commands/tools/cddtest.js
-/src/commands/tools/gsltest.js
+/desktop.ini
+*private.js
