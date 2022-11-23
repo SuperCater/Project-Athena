@@ -6,7 +6,10 @@
   "scripts": {
     "test": "node .",
     "start": "node .",
-    "build": "docker build -t athena ."
+    "build": "docker build -t athena .",
+    "delete": "node . delete",
+    "deploy": "node . deploy",
+    "full": "node . full"
   },
   "repository": {
     "type": "git",

@@ -2,8 +2,8 @@ module.exports = {
     name: 'interactionCreate',
     async execute(interaction, client) {
         if (interaction.isChatInputCommand()) {
-            if (!interaction.guild === null) {
-            console.log(`Command: ${interaction.commandName} has been executed by ${interaction.user.tag}.`)
+            if (interaction.guild.name !== null) {
+                console.log(`Command: ${interaction.commandName} has been executed by ${interaction.user.tag} in ${interaction.guild.name} ID: (${interaction.guild.id})`);
             } else {
                 console.log(`Command: ${interaction.commandName} has been executed by ${interaction.user.tag} in DMs.`)
             }
@@ -18,4 +18,3 @@ module.exports = {
         }
     }
 }
-        

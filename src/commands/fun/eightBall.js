@@ -27,4 +27,5 @@ module.exports = {
             await interaction.reply(response)
         }
     },
+    type: "GLOBAL"
 };
