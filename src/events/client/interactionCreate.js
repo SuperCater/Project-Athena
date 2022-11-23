@@ -1,4 +1,5 @@
 const { info } = require('../../modules/color.js')
+const { InteractionType } = require('discord.js')
 
 module.exports = {
     name: 'interactionCreate',
@@ -41,6 +42,18 @@ module.exports = {
             catch (error) {
                 console.error(error);
                 await interaction.reply({ content: 'There was an error while executing this menu!', ephemeral: true });
+            }
+        } else if (interaction.type === InteractionType.ModalSubmit) {
+            const { modals } = client
+            const { customId } = interaction
+            const modal = modals.get(customId)
+            if (!modal) return new Error("Modal failed to execute.");
+
+            try {
+                await modal.execute(interaction, client);
+            } catch (error) {
+                console.error(error);
+                await interaction.reply({ content: 'There was an error while executing this modal!', ephemeral: true });
             }
         }
     }
