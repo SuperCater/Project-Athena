@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { version } = require('../../../package.json');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -18,11 +19,11 @@ module.exports = {
         .addFields([
             {
                 name: "Information",
-                value: "Athena is a Discord bot developen by <@439514395534688257>. It is primarly used for Green Sky Studios but it has public utilities as well. The bot is far from completed. I would consider it about 29% done."
+                value: "Athena is a Discord bot developen by <@439514395534688257>. It is primarly used for Green Sky Studios but it has public utilities as well. The bot is far from completed. I would consider it about 35.7% done."
             },
             {
                 name: "***Version***",
-                value: "4.0.0-pre",
+                value: version,
             },
             {
                 name: "***Github***",

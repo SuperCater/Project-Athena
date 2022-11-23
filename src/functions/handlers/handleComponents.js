@@ -27,7 +27,7 @@ module.exports = client => {
                     }
 
                 default:
-                    console.log(warning("No components found."))
+                    console.log(warning(`No components found in ${folder}`))
                     break;
             }
         }

@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, UserFlagsBitField, UserManager } = require('discord.js');
+const { version } = require('../../../package.json');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -22,11 +23,11 @@ module.exports = {
             },
             {
                 name: "***GSS Features***",
-                value: "Specific features for GSS include:\n-Easy developer class switching\n-GSL Verification system\n - and more plus a lot to come."
+                value: "Specific features for GSS include:\n-Easy developer class switching\n-GSL Verification system\nDeveloper Typing\n- and more plus a lot to come."
             },
             {
                 name: "***Version***",
-                value: "4.0.0-pre",
+                value: version,
             },
             {
                 name: "***Github***",
