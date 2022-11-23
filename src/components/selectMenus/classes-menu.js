@@ -3,6 +3,8 @@ module.exports = {
         name: "classes-menu"
     },
     async execute(interaction, client) {
-        await interaction.reply(`You selects ${interaction.values[0]}`);
+        const value = interaction.values[0]
+
+        await interaction.reply(`You selected ${value}.`);
     }
 }
