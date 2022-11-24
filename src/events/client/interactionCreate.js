@@ -67,6 +67,21 @@ module.exports = {
                 console.error(error);
                 await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
             }
+        } else if (interaction.type === InteractionType.ApplicationCommandAutocomplete) {
+            const { commands } = client
+            const { commandName } = interaction
+            const command = commands.get(commandName)
+            if (!command) {
+                console.log("Command not found")
+                return error;
+            }
+
+            try {
+                await command.autocomplete(interaction, client);
+            } catch (error) {
+                console.error(error);
+                await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+            }
         }
     }
 }

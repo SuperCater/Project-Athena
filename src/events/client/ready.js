@@ -6,9 +6,12 @@ module.exports = {
     name: 'ready',
     once: true,
     async execute(client) {
-        // let status = "The Cooler Athena"
+        let status;
         status = responses[Math.floor(Math.random() * responses.length)];
         console.log(fullSuccess(`Logged in as ${client.user.tag} with status of ${status}`));
-        client.user.setActivity(status);
+        client.user.setActivity({
+            name: status,
+            type: ActivityType.Watching
+        })
     }
 }
