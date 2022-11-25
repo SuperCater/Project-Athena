@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-const {verifyListSchema, verifyModel} = require('../../schemas/verifylist.js');
+const { verifyListSchema, verifyModel } = require('../../schemas/verifylist.js');
 const mongoose = require('mongoose');
 
 module.exports = {
@@ -18,7 +18,16 @@ module.exports = {
                 .addRoleOption(option =>
                     option.setName('role')
                         .setDescription('The role to add to the GSL verification list.')
-                        .setRequired(true)))
+                        .setRequired(true))
+                .addStringOption(option =>
+                    option.setName('rank')
+                        .setDescription('The rank of the user')
+                        .setRequired(true)
+                        .setChoices(
+                            { name: 'Executive', value: 'Executive' },
+                            { name: 'Developer', value: 'Developer' },
+                            { name: 'Moderator', value: 'Moderator' },
+                            { name: "Advisor", value: "Advisor" })))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('remove')
@@ -35,9 +44,10 @@ module.exports = {
 
         if (subcommand === 'add') {
             const role = interaction.options.getRole('role');
+            const rank = interaction.options.getString('rank');
 
 
-            userToCheck.findOne({ userID: user}, async (err, data) => {
+            userToCheck.findOne({ userID: user }, async (err, data) => {
                 if (err) throw err;
                 if (data) {
                     await interaction.reply(`The user: ${userO.tag} is already on the verification list.`);
@@ -45,13 +55,15 @@ module.exports = {
                     const newData = new userToCheck({
                         _id: mongoose.Types.ObjectId(),
                         userID: user,
-                        role: interaction.options.getRole('role').id,
+                        roleID: interaction.options.getRole('role').id,
+                        roleName: interaction.options.getRole('role').name,
+                        rank: rank,
                     });
                     newData.save();
-                    await interaction.reply(`Added ${userO.tag} to the verification list as ${role}.`);
+                    await interaction.reply(`Added ${userO.tag} to the verification list as ${role} as an ${rank}.`);
                 }
             })
-            
+
         } else if (subcommand === 'remove') {
             userToCheck.findOneAndDelete({ userID: user }, async (err, data) => {
                 if (err) throw err;

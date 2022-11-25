@@ -3,7 +3,11 @@ const { Schema, model } = require('mongoose');
 const verifyListSchema = new Schema({
     _id: Schema.Types.ObjectId,
     userID: String,
-    role: String,
+    userName: String,
+    userTag: String,
+    roleID: String,
+    roleName: String,
+    rank: String,
 });
 
 

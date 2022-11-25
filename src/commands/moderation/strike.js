@@ -25,7 +25,7 @@ module.exports = {
             if (subcommand === 'add') {
             if (member.roles.cache.has(strike1.id)) {
                 if (member.roles.cache.has(strike2.id)) {
-                    await interaction.reply(`This user already has 2 strikes.`);
+                    await interaction.guild.members.ban(user.id, { reason: "3 Strikes" });
                 } else {
                     member.roles.add(strike2);
                     await interaction.reply(`Striked ${user.username} for the second time.`);

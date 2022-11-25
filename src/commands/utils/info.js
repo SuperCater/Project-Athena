@@ -19,7 +19,7 @@ module.exports = {
         .addFields([
             {
                 name: "Information",
-                value: "Athena is a Discord bot developen by <@439514395534688257>. It is primarly used for Green Sky Studios but it has public utilities as well. The bot is far from completed. I would consider it about 79% done."
+                value: "Athena is a Discord bot developed by <@439514395534688257>. It is primarly used for Green Sky Studios but it has public utilities as well. The bot is far from completed. I would consider it about 79% done."
             },
             {
                 name: "***Version***",
