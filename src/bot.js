@@ -1,4 +1,5 @@
-const { token } = require('../config.json');
+const { token, databaseToken } = require('../config.json');
+const { connect } = require('mongoose');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const fs = require('fs');
 
@@ -32,3 +33,7 @@ client.login(token);
 client.handleEvents();
 client.handleComponents();
 client.handleCommands();
+
+(async () => {
+    await connect(databaseToken).catch(err => console.log(err));
+})();

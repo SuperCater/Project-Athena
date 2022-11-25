@@ -1,4 +1,6 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
+const {verifyListSchema, verifyModel} = require('../../schemas/verifylist.js');
+const mongoose = require('mongoose');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -9,30 +11,54 @@ module.exports = {
             subcommand
                 .setName('add')
                 .setDescription('Add someone to the GSL verification list.')
-                .addUserOption(option =>
+                .addStringOption(option =>
                     option.setName('user')
-                        .setDescription('The user to add to the GSL verification list.')
+                        .setDescription('The user id to add to the GSL verification list.')
+                        .setRequired(true))
+                .addRoleOption(option =>
+                    option.setName('role')
+                        .setDescription('The role to add to the GSL verification list.')
                         .setRequired(true)))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('remove')
                 .setDescription('Remove someone from the GSL verification list.')
-                .addUserOption(option =>
+                .addStringOption(option =>
                     option.setName('user')
-                        .setDescription('The user to remove from the GSL verification list.')
+                        .setDescription('The user ID to remove from the GSL verification list.')
                         .setRequired(true))),
     async execute(interaction) {
         const subcommand = interaction.options.getSubcommand();
-        const user = interaction.options.getUser('user');
+        const user = interaction.options.getString('user');
+        const userToCheck = mongoose.model('verifyList', verifyListSchema, 'verifyList');
 
         if (subcommand === 'add') {
-            await interaction.reply({ content: `Added ${user} to the GSL verification list.`});
+            const role = interaction.options.getRole('role');
+            userToCheck.findOne({ userID: user}, async (err, data) => {
+                if (err) throw err;
+                if (data) {
+                    interaction.reply(`The user ID: <@${user}> is already on the verification list.`);
+                } else {
+                    const newData = new userToCheck({
+                        _id: mongoose.Types.ObjectId(),
+                        userID: user,
+                        role: interaction.options.getRole('role').id,
+                    });
+                    newData.save();
+                    interaction.reply(`Added <@${user}> to the verification list as ${role}.`);
+                }
+            })
+            
         } else if (subcommand === 'remove') {
-            await interaction.reply({ content: `Removed ${user} from the GSL verification list.`});
+            userToCheck.findOneAndDelete({ userID: user }, async (err, data) => {
+                if (err) throw err;
+                if (data) {
+                    interaction.reply(`Removed <@${user}> from the verification list.`);
+                } else {
+                    interaction.reply(`The user ID: <@${user}> is not on the verification list.`);
+                }
+            })
         }
-
-
-        await interaction.followUp({ content: 'This does nothing... yet' });
     },
     type: "GSL",
 }
