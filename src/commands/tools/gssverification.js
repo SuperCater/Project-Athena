@@ -27,17 +27,20 @@ module.exports = {
                     option.setName('user')
                         .setDescription('The user ID to remove from the GSL verification list.')
                         .setRequired(true))),
-    async execute(interaction) {
+    async execute(interaction, client) {
         const subcommand = interaction.options.getSubcommand();
         const user = interaction.options.getString('user');
         const userToCheck = mongoose.model('verifyList', verifyListSchema, 'verifyList');
+        const userO = client.users.cache.get(user)
 
         if (subcommand === 'add') {
             const role = interaction.options.getRole('role');
+
+
             userToCheck.findOne({ userID: user}, async (err, data) => {
                 if (err) throw err;
                 if (data) {
-                    interaction.reply(`The user ID: <@${user}> is already on the verification list.`);
+                    await interaction.reply(`The user: ${userO.tag} is already on the verification list.`);
                 } else {
                     const newData = new userToCheck({
                         _id: mongoose.Types.ObjectId(),
@@ -45,7 +48,7 @@ module.exports = {
                         role: interaction.options.getRole('role').id,
                     });
                     newData.save();
-                    interaction.reply(`Added <@${user}> to the verification list as ${role}.`);
+                    await interaction.reply(`Added ${userO.tag} to the verification list as ${role}.`);
                 }
             })
             
@@ -53,9 +56,9 @@ module.exports = {
             userToCheck.findOneAndDelete({ userID: user }, async (err, data) => {
                 if (err) throw err;
                 if (data) {
-                    interaction.reply(`Removed <@${user}> from the verification list.`);
+                    await interaction.reply(`Removed ${userO.tag} from the verification list.`);
                 } else {
-                    interaction.reply(`The user ID: <@${user}> is not on the verification list.`);
+                    await interaction.reply(`The user ${userO.tag} is not on the verification list.`);
                 }
             })
         }
