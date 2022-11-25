@@ -19,7 +19,7 @@ module.exports = {
         .addFields([
             {
                 name: "Information",
-                value: "Athena is a Discord bot developen by <@439514395534688257>. It is primarly used for Green Sky Studios but it has public utilities as well. The bot is far from completed. I would consider it about 64% done."
+                value: "Athena is a Discord bot developen by <@439514395534688257>. It is primarly used for Green Sky Studios but it has public utilities as well. The bot is far from completed. I would consider it about 79% done."
             },
             {
                 name: "***Version***",
@@ -27,7 +27,7 @@ module.exports = {
             },
             {
                 name: "***Github***",
-                value: "https://github.com/SuperCater/Project-Athena/tree/V4"
+                value: "https://github.com/SuperCater/Project-Athena/tree/main"
             }
         ]);
 

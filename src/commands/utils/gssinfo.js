@@ -31,7 +31,7 @@ module.exports = {
             },
             {
                 name: "***Github***",
-                value: "https://github.com/SuperCater/Project-Athena/tree/V4"
+                value: "https://github.com/SuperCater/Project-Athena/tree/main"
             }
         ]);
 

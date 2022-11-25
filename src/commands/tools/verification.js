@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('gslverification')
+        .setName('verifylist')
         .setDescription('Add someone to the GSL verification list.')
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .addSubcommand(subcommand =>
