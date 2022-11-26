@@ -39,7 +39,7 @@ module.exports = {
     async execute(interaction, client) {
         const subcommand = interaction.options.getSubcommand();
         const user = interaction.options.getString('user');
-        const userToCheck = mongoose.model('verifyList', verifyListSchema, 'verifyList');
+        const userToCheck = verifyModel
         const userO = client.users.cache.get(user)
 
         if (subcommand === 'add') {
@@ -58,6 +58,7 @@ module.exports = {
                         roleID: interaction.options.getRole('role').id,
                         roleName: interaction.options.getRole('role').name,
                         rank: rank,
+                        strikes: 0
                     });
                     newData.save();
                     await interaction.reply(`Added ${userO.tag} to the verification list as ${role} as an ${rank}.`);

@@ -25,7 +25,7 @@ module.exports = {
                 .setRequired(true)),
 
     async execute(interaction) {
-        const userToCheck = mongoose.model('verifyList', verifyListSchema, 'verifyList');
+        const userToCheck = verifyModel
         const role = interaction.options.getRole('role');
         const rank = interaction.options.getString('rank');
         const checkUser = interaction.options.getUser('user');
@@ -45,27 +45,35 @@ module.exports = {
             user.roleID = role.id;
             user.roleName = role.name;
             user.rank = rank;
+            if (user.strikes === undefined) {
+                user.strikes = 0;
+            }
             await user.save();
 
 
             const added = new EmbedBuilder()
-            .setTitle(`Updated ${user.userTag} `)
-            .setDescription(`Updated ${user.userTag} `)
-            .setThumbnail(checkUser.displayAvatarURL())
-            .setFields({
-                name: 'User',
-                value: `Name: ${user.userName}\nTag: ${user.userTag}\nID: ${user.userID}`,
-            },
-            {
-                name: 'Role',
-                value: `Name: ${user.roleName}\nID: ${user.roleID}`,
+                .setTitle(`Updated ${user.userTag} `)
+                .setDescription(`Updated ${user.userTag} `)
+                .setThumbnail(checkUser.displayAvatarURL())
+                .setFields({
+                    name: 'User',
+                    value: `Name: ${user.userName}\nTag: ${user.userTag}\nID: ${user.userID}`,
                 },
-                {
-                    name: 'Rank',
-                    value: `${user.rank}`,
-                })
-            .setColor(0x1a1ca8)
-            .setFooter({ text: `Updated by ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL() });
+                    {
+                        name: 'Role',
+                        value: `Name: ${user.roleName}\nID: ${user.roleID}`,
+                    },
+                    {
+                        name: 'Rank',
+                        value: `${user.rank}`,
+                    },
+                    {
+                        name: 'General Info',
+                        value: `Strikes: ${user.strikes}`,
+                    }
+                )
+                .setColor(0x1a1ca8)
+                .setFooter({ text: `Updated by ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL() });
 
 
             await interaction.reply({ embeds: [added] });

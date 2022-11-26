@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder, ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
 const { verifyListSchema, verifyModel } = require('../../schemas/verifylist.js');
 const mongoose = require('mongoose');
 
@@ -8,19 +8,34 @@ module.exports = {
         .setDescription('Verify yourself as a GSL member.'),
     async execute(interaction) {
         try {
-            const userToCheck = mongoose.model('verifyList', verifyListSchema, 'verifyList');
             const user = interaction.user;
             const member = interaction.member;
-            userToCheck.findOne({ userID: user.id }, async (err, data) => {
+
+            const modal = new ModalBuilder()
+                .setCustomId('gslpass')
+                .setTitle('Password')
+
+            const textInput = new TextInputBuilder()
+                .setCustomId('gslpassinput')
+                .setLabel('Enter the GSL executive password.')
+                .setRequired(true)
+                .setStyle(TextInputStyle.Short);
+
+            modal.addComponents(
+                new ActionRowBuilder()
+                    .addComponents(textInput)
+            );
+
+
+
+            verifyModel.findOne({ userID: user.id }, async (err, data) => {
                 if (err) throw err;
                 if (data) {
-                    member.roles.add(data.roleID);
-                    const role = interaction.guild.roles.cache.get(data.roleID);
 
                     switch (data.rank) {
                         case 'Executive':
-                            member.roles.add('1017820213032530000');
-                            break;
+                            await interaction.showModal(modal);
+                            return;
                         case 'Developer':
                             member.roles.add('1017819424440471583');
                             break;
@@ -31,6 +46,9 @@ module.exports = {
                             member.roles.add('1020642426228056105');
                             break;
                     }
+
+                    member.roles.add(data.roleID);
+                    const role = interaction.guild.roles.cache.get(data.roleID);
 
                     const embed = new EmbedBuilder()
                         .setColor('#00ff00')

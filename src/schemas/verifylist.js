@@ -8,6 +8,7 @@ const verifyListSchema = new Schema({
     roleID: String,
     roleName: String,
     rank: String,
+    strikes: Number,
 });
 
 
