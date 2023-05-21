@@ -1,7 +1,3 @@
 # Athena4
-You're on the V4 branch of Athena. This version of Athena uses more modular handelers and more efficient command deployment. This version is stil a pre-release version and is mainly for testing.
 
-# TODO:
-- Reaction Framework
-- Better permissions
-- Database
+## This project has been archived and has been moved under the GSS organization. Code is closed source. Keeping this up as an archive, my code is shit so have fun!
